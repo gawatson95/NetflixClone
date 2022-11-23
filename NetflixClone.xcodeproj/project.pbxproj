@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C05773D6292E7A38009F6C05 /* TVShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05773D5292E7A38009F6C05 /* TVShow.swift */; };
 		C0AD85D2292D5B4B00427571 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD85D1292D5B4B00427571 /* AppDelegate.swift */; };
 		C0AD85D4292D5B4B00427571 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD85D3292D5B4B00427571 /* SceneDelegate.swift */; };
 		C0AD85D6292D5B4B00427571 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD85D5292D5B4B00427571 /* MainTabBarViewController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C05773D5292E7A38009F6C05 /* TVShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShow.swift; sourceTree = "<group>"; };
 		C0AD85CE292D5B4B00427571 /* NetflixClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetflixClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0AD85D1292D5B4B00427571 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0AD85D3292D5B4B00427571 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				C0AD85FA292D7B4D00427571 /* Movie.swift */,
+				C05773D5292E7A38009F6C05 /* TVShow.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C05773D6292E7A38009F6C05 /* TVShow.swift in Sources */,
 				C0AD85EB292D5C9300427571 /* SearchViewController.swift in Sources */,
 				C0AD85D6292D5B4B00427571 /* MainTabBarViewController.swift in Sources */,
 				C0AD85F5292D60CE00427571 /* CollectionViewTableViewCell.swift in Sources */,
