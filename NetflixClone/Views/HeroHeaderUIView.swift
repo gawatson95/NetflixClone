@@ -15,7 +15,7 @@ class HeroHeaderUIView: UIView {
         button.layer.borderColor = UIColor.systemRed.cgColor
         button.layer.borderWidth = 1
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 10
         button.backgroundColor = .systemRed
         return button
     }()
@@ -26,7 +26,7 @@ class HeroHeaderUIView: UIView {
         button.layer.borderColor = UIColor.systemRed.cgColor
         button.layer.borderWidth = 1
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 10
         button.backgroundColor = .systemRed
         return button
     }()
