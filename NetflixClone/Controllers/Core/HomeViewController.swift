@@ -16,6 +16,9 @@ enum Sections: Int {
 }
 
 class HomeViewController: UIViewController {
+    private var headerView: HeroHeaderUIView?
+    
+    private var randomTrendingMovie: Title?
     
     let sectionTitles: [String] = ["Trending Movies", "Trending TV", "Popular", "Top Rated", "Upcoming Movies"]
     
@@ -36,8 +39,22 @@ class HomeViewController: UIViewController {
         
         configureNavbar()
         
-        let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
+        headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
         homeFeedTable.tableHeaderView = headerView
+        configureHeroHeaderView()
+    }
+    
+    private func configureHeroHeaderView() {
+        APICaller.shared.getTrendingMovies { [weak self] result in
+            switch result {
+            case .success(let titles):
+                let selectedTitle = titles.randomElement()
+                self?.randomTrendingMovie = selectedTitle
+                self?.headerView?.configure(with: TitleViewModel(titleName: selectedTitle?.title ?? "", posterURL: selectedTitle?.poster_path ?? ""))
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     private func configureNavbar() {
@@ -51,7 +68,7 @@ class HomeViewController: UIViewController {
             UIBarButtonItem(image: UIImage(systemName: "play.rectangle"), style: .done, target: self, action: nil)
         ]
         
-        navigationController?.navigationBar.tintColor = UIColor.systemRed
+        navigationController?.navigationBar.tintColor = .systemRed
     }
     
     override func viewDidLayoutSubviews() {

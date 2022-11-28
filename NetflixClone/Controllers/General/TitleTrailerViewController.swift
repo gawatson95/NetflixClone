@@ -20,7 +20,7 @@ class TitleTrailerViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 22, weight: .bold)
-        label.text = "Lady Gaga"
+        label.text = ""
         return label
     }()
     
@@ -29,7 +29,7 @@ class TitleTrailerViewController: UIViewController {
         label.font = .systemFont(ofSize: 18, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.text = "The popstar of our generation"
+        label.text = ""
         return label
     }()
     

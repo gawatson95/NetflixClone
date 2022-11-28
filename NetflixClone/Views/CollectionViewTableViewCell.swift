@@ -25,13 +25,13 @@ class CollectionViewTableViewCell: UITableViewCell {
         layout.itemSize = CGSize(width: 144, height: 200)
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: TitleCollectionViewCell.identifier)
         return collectionView
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .systemPink
         contentView.addSubview(collectionView)
         
         collectionView.delegate = self
@@ -52,6 +52,18 @@ class CollectionViewTableViewCell: UITableViewCell {
         
         DispatchQueue.main.async { [weak self] in
             self?.collectionView.reloadData()
+        }
+    }
+    
+    private func downloadTitleAt(indexPath: IndexPath) {
+    
+        DataPersistenceManager.shared.downloadTitle(with: titles[indexPath.row]) { result in
+            switch result {
+            case .success():
+                NotificationCenter.default.post(name: NSNotification.Name("downloaded"), object: nil)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
     }
 }
@@ -75,8 +87,9 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
+        
         let title = titles[indexPath.row]
-        guard let titleName = title.title ?? title.original_title else { return }
+        guard let titleName = title.title ?? title.original_title ?? title.name ?? title.original_name else { return }
         
         APICaller.shared.getMovieTrailer(with: titleName + " trailer") { [weak self] result in
             switch result {
@@ -90,4 +103,14 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in
+            let downloadAction = UIAction(title: "Download", image: nil, identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
+                self?.downloadTitleAt(indexPath: indexPath)
+            }
+            return UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: [downloadAction])
+        }
+        
+        return config
+    }
 }
